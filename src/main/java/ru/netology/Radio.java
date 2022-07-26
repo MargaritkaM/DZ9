@@ -1,8 +1,36 @@
 package ru.netology;
 
 public class Radio {
+    private int firstStation = 0;
+    private int lastStation = 9;
+    private int numberStation = 10;
+    private int firstVolume = 0;
+    private int lastVolume = 100;
+
     private int currentStation;
     private int currentVolume;
+
+    public Radio(int numberStation) {
+        this.numberStation = numberStation;
+        this.firstStation = 0;
+        this.lastStation = numberStation - 1;
+    }
+
+    public Radio() {
+    }
+
+    public int getNumberStation() {
+        return numberStation;
+    }
+
+    public int getLastStation() {
+        return lastStation;
+    }
+
+    public int getFirstStation() {
+        return firstStation;
+    }
+
 
     public int getCurrentStation() {
         return currentStation;
@@ -13,10 +41,10 @@ public class Radio {
     }
 
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < firstStation) {
             return;
         }
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > lastStation) {
             return;
         }
         currentStation = newCurrentStation;
@@ -24,46 +52,46 @@ public class Radio {
 
     public void next() {
         int target = currentStation + 1;
-        if (currentStation == 9) {
-            target = 0;
+        if (currentStation == lastStation) {
+            target = firstStation;
         }
         setCurrentStation(target);
     }
 
     public void prev() {
         int target = currentStation - 1;
-        if (currentStation == 0) {
-            target = 9;
+        if (currentStation == firstStation) {
+            target = lastStation;
         }
         setCurrentStation(target);
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
-        //
+
         currentVolume = newCurrentVolume;
     }
 
     public void turnUpVolume() {
-        if ((currentVolume >= 0) && (currentVolume < 10)) {
+        if ((currentVolume >= firstVolume) && (currentVolume < lastVolume)) {
             currentVolume = currentVolume + 1;
         }
-        if (currentVolume >= 10) {
-            currentVolume = 10;
+        if (currentVolume >= lastVolume) {
+            currentVolume = lastVolume;
         }
-        if (currentVolume < 0) {
-            currentVolume = 0;
+        if (currentVolume < firstVolume) {
+            currentVolume = firstVolume;
         }
     }
 
     public void turnDownVolume() {
-        if ((currentVolume > 0) && (currentVolume <= 10)) {
+        if ((currentVolume > firstVolume) && (currentVolume <= lastVolume)) {
             currentVolume = currentVolume - 1;
         }
-        if (currentVolume > 10) {
-            currentVolume = 10;
+        if (currentVolume > lastVolume) {
+            currentVolume = lastVolume;
         }
-        if (currentVolume <= 0) {
-            currentVolume = 0;
+        if (currentVolume <= firstVolume) {
+            currentVolume = firstVolume;
         }
     }
 }
